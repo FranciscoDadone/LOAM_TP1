@@ -18,7 +18,6 @@ import com.loam.trabajopractico1loam.R
 @Composable
 fun HomeScreen(
     onNavigateToPrecios: () -> Unit,
-    onNavigateToDemo: () -> Unit,
     onNavigateToSection3: () -> Unit,
     onNavigateToSection4: () -> Unit
 ) {
@@ -42,11 +41,10 @@ fun HomeScreen(
             iconRes = R.drawable.ic_launcher_background,
             onClick = onNavigateToPrecios
         )
-        MenuButton(
-            text = "Demo Firebase",
+        Widget(
+            text = "Cotización dólar: $",
             color = Color(0xFF2196F3),
             iconRes = R.drawable.ic_launcher_background,
-            onClick = onNavigateToDemo
         )
         MenuButton(
             text = "Sección 3",
@@ -70,6 +68,37 @@ fun MenuButton(text: String, color: Color, iconRes: Int, onClick: () -> Unit) {
             .fillMaxWidth()
             .height(80.dp)
             .clickable { onClick() },
+        colors = CardDefaults.cardColors(containerColor = color),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Spacer(modifier = Modifier.width(16.dp))
+            Image(
+                painter = painterResource(id = iconRes),
+                contentDescription = text,
+                modifier = Modifier.size(40.dp)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(
+                text = text,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.White
+            )
+        }
+    }
+}
+
+@Composable
+fun Widget(text: String, color: Color, iconRes: Int) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp),
         colors = CardDefaults.cardColors(containerColor = color),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)

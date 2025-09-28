@@ -41,7 +41,6 @@ class MainActivity : ComponentActivity() {
                     "precios" -> PreciosReferenciaScreen(
                         onNavigateBack = { currentScreen = "home" }
                     )
-                    "demo" -> FirestoreDemo(db = db)
                 }
             }
         }
@@ -52,7 +51,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(db: com.google.firebase.firestore.FirebaseFirestore) {
     var selectedTab by remember { mutableStateOf(0) }
-    
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -86,117 +85,9 @@ fun MainScreen(db: com.google.firebase.firestore.FirebaseFirestore) {
         }
     ) { innerPadding ->
         when (selectedTab) {
-            0 -> FirestoreDemo(
-                db = db,
-                modifier = Modifier.padding(innerPadding)
-            )
             1 -> PreciosReferenciaScreen()
         }
     }
-}
-
-@Composable
-fun FirestoreDemo(
-    db: com.google.firebase.firestore.FirebaseFirestore,
-    modifier: Modifier = Modifier
-) {
-    var message by remember { mutableStateOf("Firebase configurado correctamente") }
-    var inputText by remember { mutableStateOf("") }
-    var savedData by remember { mutableStateOf("") }
-    
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        Text(
-            text = "Firebase Firestore Demo",
-            style = MaterialTheme.typography.headlineMedium
-        )
-        
-        Text(text = message)
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        // Input para guardar datos
-        OutlinedTextField(
-            value = inputText,
-            onValueChange = { inputText = it },
-            label = { Text("Texto a guardar") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        
-        // Botón para guardar datos
-        Button(
-            onClick = {
-                if (inputText.isNotEmpty()) {
-                    saveDataToFirestore(db, inputText) { success ->
-                        message = if (success) {
-                            "Datos guardados exitosamente"
-                        } else {
-                            "Error al guardar datos"
-                        }
-                    }
-                }
-            }
-        ) {
-            Text("Guardar en Firestore")
-        }
-        
-        // Botón para leer datos
-        Button(
-            onClick = {
-                readDataFromFirestore(db) { data ->
-                    savedData = data ?: "No hay datos guardados"
-                    message = "Datos leídos de Firestore"
-                }
-            }
-        ) {
-            Text("Leer de Firestore")
-        }
-        
-        if (savedData.isNotEmpty()) {
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = "Último dato guardado:",
-                        style = MaterialTheme.typography.labelMedium
-                    )
-                    Text(
-                        text = savedData,
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                }
-            }
-        }
-    }
-}
-
-// Función para guardar datos en Firestore
-private fun saveDataToFirestore(
-    db: com.google.firebase.firestore.FirebaseFirestore,
-    text: String,
-    onComplete: (Boolean) -> Unit
-) {
-    val data = hashMapOf(
-        "text" to text,
-        "timestamp" to com.google.firebase.Timestamp.now()
-    )
-    
-    db.collection("demo_data")
-        .add(data)
-        .addOnSuccessListener { documentReference ->
-            Log.d("Firestore", "Documento creado con ID: ${documentReference.id}")
-            onComplete(true)
-        }
-        .addOnFailureListener { e ->
-            Log.w("Firestore", "Error al agregar documento", e)
-            onComplete(false)
-        }
 }
 
 // Función para leer datos de Firestore
