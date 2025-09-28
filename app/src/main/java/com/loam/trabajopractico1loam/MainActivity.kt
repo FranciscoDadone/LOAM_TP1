@@ -1,6 +1,8 @@
 package com.loam.trabajopractico1loam
 
+import android.content.Context
 import android.content.Intent
+import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
@@ -29,6 +31,10 @@ class MainActivity : AppCompatActivity() {
     
     private val decimalFormat = DecimalFormat("#.##")
 
+    private lateinit var cameraManager: CameraManager
+    private var cameraId: String? = null
+    private var isFlashOn = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,8 +42,44 @@ class MainActivity : AppCompatActivity() {
         initViews()
         setupClickListeners()
         observeViewModel()
+
+        cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        cameraId = cameraManager.cameraIdList.first {
+            cameraManager.getCameraCharacteristics(it)
+                .get(android.hardware.camera2.CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
+        }
+
+        btnSeccion3.setOnClickListener {
+            if (isFlashOn) {
+                apagarFlash()
+            } else {
+                encenderFlash()
+            }
+        }
+
     }
-    
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isFlashOn) {
+            apagarFlash()
+        }
+    }
+    private fun encenderFlash() {
+        cameraId?.let {
+            cameraManager.setTorchMode(it, true)
+            isFlashOn = true
+        }
+    }
+
+    private fun apagarFlash() {
+        cameraId?.let {
+            cameraManager.setTorchMode(it, false)
+            isFlashOn = false
+        }
+    }
+
+
     private fun initViews() {
         // Widget del dólar
         layoutLoading = findViewById(R.id.layoutLoading)
