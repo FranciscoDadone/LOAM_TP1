@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "519977683953",
+    "project_id": "loam-25500",
+    "storage_bucket": "loam-25500.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519977683953:android:32fc28f36b9384d0961250",
+        "android_client_info": {
+          "package_name": "com.loam.trabajopractico1loam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTV4AmXMeV385gOQC2CzqwZbZBxYC1x9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
