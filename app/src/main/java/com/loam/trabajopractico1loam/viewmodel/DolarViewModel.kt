@@ -29,6 +29,7 @@ class DolarViewModel : ViewModel() {
             _uiState.value = _uiState.value?.copy(isLoading = true, errorMessage = null)
             try {
                 val dolar = dolarService.getDolarOficial()
+                System.out.println("Dolar: " + dolar.compra);
                 _uiState.value = _uiState.value?.copy(
                     dolar = dolar,
                     isLoading = false

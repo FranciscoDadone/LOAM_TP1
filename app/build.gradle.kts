@@ -60,10 +60,9 @@ dependencies {
     // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    implementation("io.ktor:ktor-client-core:2.3.6") // Or the latest version
-    implementation("io.ktor:ktor-client-cio:2.3.6") // Or another engine like Android, OkHttp, etc.
-    implementation("io.ktor:ktor-client-content-negotiation:2.3.6")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
+    implementation("io.ktor:ktor-client-core:2.3.6")
+    implementation("io.ktor:ktor-client-cio:2.3.6")
+    implementation("com.google.code.gson:gson:2.10.1")
     implementation(libs.material)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
