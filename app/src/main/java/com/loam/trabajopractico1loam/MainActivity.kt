@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var layoutSuccess: LinearLayout
     private lateinit var tvCompra: TextView
     private lateinit var tvVenta: TextView
+    private lateinit var tvLinterna: TextView
     
     // Botones del menú
     private lateinit var btnPrecios: CardView
@@ -52,8 +53,10 @@ class MainActivity : AppCompatActivity() {
         btnSeccion3.setOnClickListener {
             if (isFlashOn) {
                 apagarFlash()
+                tvLinterna.text = "Linterna apagada"
             } else {
                 encenderFlash()
+                tvLinterna.text = "Linterna encendida"
             }
         }
 
@@ -87,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         layoutSuccess = findViewById(R.id.layoutSuccess)
         tvCompra = findViewById(R.id.tvCompra)
         tvVenta = findViewById(R.id.tvVenta)
+        tvLinterna = findViewById(R.id.modoLinternaTexto)
         
         // Botones del menú
         btnPrecios = findViewById(R.id.btnPrecios)
