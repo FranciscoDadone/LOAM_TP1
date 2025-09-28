@@ -29,25 +29,25 @@ enum class TipoPrecio(
         displayName = "Metro Cuadrado de Construcción",
         unidad = "m²",
         descripcion = "Precio promedio por metro cuadrado de construcción",
-        icono = "🏗️"
+        icono = "MC"
     ),
     HONORARIOS_PROFESIONALES(
         displayName = "Honorarios Profesionales",
         unidad = "hora",
         descripcion = "Tarifa por hora de servicios profesionales",
-        icono = "👷"
+        icono = "HP"
     ),
     MATERIALES_BASICOS(
         displayName = "Materiales Básicos",
         unidad = "m³",
         descripcion = "Precio promedio de materiales básicos (cemento, arena, grava)",
-        icono = "🧱"
+        icono = "MB"
     ),
     MANO_OBRA_ESPECIALIZADA(
         displayName = "Mano de Obra Especializada",
         unidad = "día",
         descripcion = "Costo diario de mano de obra especializada",
-        icono = "⚡"
+        icono = "MO"
     )
 }
 

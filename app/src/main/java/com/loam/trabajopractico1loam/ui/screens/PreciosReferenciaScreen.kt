@@ -26,6 +26,7 @@ import java.util.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PreciosReferenciaScreen(
+    onNavigateBack: () -> Unit = {},
     viewModel: PreciosViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -42,6 +43,22 @@ fun PreciosReferenciaScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
+        // Botón de volver al home
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
+            horizontalArrangement = Arrangement.Start
+        ) {
+            Button(
+                onClick = onNavigateBack,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.secondary
+                )
+            ) {
+                Text("Volver al Home")
+            }
+        }
         // Header
         Card(
             modifier = Modifier
@@ -56,7 +73,7 @@ fun PreciosReferenciaScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "💰 Precios de Referencia",
+                    text = "Precios de Referencia",
                     style = MaterialTheme.typography.headlineMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     fontWeight = FontWeight.Bold
@@ -130,7 +147,7 @@ fun PreciosReferenciaScreen(
                             )
                         ) {
                             Text(
-                                text = "📊 Inicializando precios...\nEsto puede tomar unos segundos",
+                                text = "Inicializando precios...\nEsto puede tomar unos segundos",
                                 modifier = Modifier.padding(24.dp),
                                 style = MaterialTheme.typography.bodyLarge,
                                 textAlign = TextAlign.Center
@@ -152,7 +169,7 @@ fun PreciosReferenciaScreen(
                 )
             ) {
                 Text(
-                    text = "⚠️ $error",
+                    text = "Error: $error",
                     modifier = Modifier.padding(16.dp),
                     color = MaterialTheme.colorScheme.onErrorContainer
                 )

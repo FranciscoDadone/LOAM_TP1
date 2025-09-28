@@ -38,7 +38,9 @@ class MainActivity : ComponentActivity() {
                         onNavigateToSection3 = { currentScreen = "section3" },
                         onNavigateToSection4 = { currentScreen = "section4" }
                     )
-                    "precios" -> PreciosReferenciaScreen()
+                    "precios" -> PreciosReferenciaScreen(
+                        onNavigateBack = { currentScreen = "home" }
+                    )
                     "demo" -> FirestoreDemo(db = db)
                 }
             }
