@@ -1,149 +1,102 @@
 package com.loam.trabajopractico1loam
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.firestore
-import com.loam.trabajopractico1loam.ui.screens.HomeScreen
-import com.loam.trabajopractico1loam.ui.screens.PreciosReferenciaScreen
-import com.loam.trabajopractico1loam.ui.theme.TrabajoPractico1LOAMTheme
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import com.loam.trabajopractico1loam.viewmodel.DolarViewModel
+import java.text.DecimalFormat
 
-class MainActivity : ComponentActivity() {
-    private val db = Firebase.firestore
+class MainActivity : AppCompatActivity() {
     
+    private val dolarViewModel: DolarViewModel by viewModels()
+    
+    // Views del widget del dólar
+    private lateinit var layoutLoading: LinearLayout
+    private lateinit var layoutError: LinearLayout
+    private lateinit var layoutSuccess: LinearLayout
+    private lateinit var tvCompra: TextView
+    private lateinit var tvVenta: TextView
+    
+    // Botones del menú
+    private lateinit var btnPrecios: CardView
+    private lateinit var btnSeccion3: CardView
+    private lateinit var btnSeccion4: CardView
+    
+    private val decimalFormat = DecimalFormat("#.##")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            TrabajoPractico1LOAMTheme {
-                var currentScreen by remember { mutableStateOf("home") }
-
-                when (currentScreen) {
-                    "home" -> HomeScreen(
-                        onNavigateToPrecios = { currentScreen = "precios" },
-                        onNavigateToDemo = { currentScreen = "demo" },
-                        onNavigateToSection3 = { currentScreen = "section3" },
-                        onNavigateToSection4 = { currentScreen = "section4" }
-                    )
-                    "precios" -> PreciosReferenciaScreen(
-                        onNavigateBack = { currentScreen = "home" }
-                    )
-                }
-            }
+        setContentView(R.layout.activity_main)
+        
+        initViews()
+        setupClickListeners()
+        observeViewModel()
+    }
+    
+    private fun initViews() {
+        // Widget del dólar
+        layoutLoading = findViewById(R.id.layoutLoading)
+        layoutError = findViewById(R.id.layoutError)
+        layoutSuccess = findViewById(R.id.layoutSuccess)
+        tvCompra = findViewById(R.id.tvCompra)
+        tvVenta = findViewById(R.id.tvVenta)
+        
+        // Botones del menú
+        btnPrecios = findViewById(R.id.btnPrecios)
+        btnSeccion3 = findViewById(R.id.btnSeccion3)
+        btnSeccion4 = findViewById(R.id.btnSeccion4)
+    }
+    
+    private fun setupClickListeners() {
+        btnPrecios.setOnClickListener {
+            startActivity(Intent(this, PreciosActivity::class.java))
+        }
+        
+        btnSeccion3.setOnClickListener {
+            // TODO: Implementar navegación a Sección 3
+        }
+        
+        btnSeccion4.setOnClickListener {
+            // TODO: Implementar navegación a Sección 4
+        }
+        
+        layoutError.setOnClickListener {
+            dolarViewModel.retry()
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MainScreen(db: com.google.firebase.firestore.FirebaseFirestore) {
-    var selectedTab by remember { mutableStateOf(0) }
-
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(
-                title = { 
-                    Text(
-                        text = if (selectedTab == 0) "Demo Firebase" else "Precios de Referencia"
-                    ) 
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-            )
-        },
-        bottomBar = {
-            NavigationBar {
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Home, contentDescription = "Demo") },
-                    label = { Text("Demo") },
-                    selected = selectedTab == 0,
-                    onClick = { selectedTab = 0 }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Info, contentDescription = "Precios") },
-                    label = { Text("Precios") },
-                    selected = selectedTab == 1,
-                    onClick = { selectedTab = 1 }
-                )
-            }
-        }
-    ) { innerPadding ->
-        when (selectedTab) {
-            1 -> PreciosReferenciaScreen()
+    
+    private fun observeViewModel() {
+        dolarViewModel.uiState.observe(this) { state ->
+            updateDolarWidget(state)
         }
     }
-}
-
-// Función para leer datos de Firestore
-private fun readDataFromFirestore(
-    db: com.google.firebase.firestore.FirebaseFirestore,
-    onComplete: (String?) -> Unit
-) {
-    db.collection("demo_data")
-        .orderBy("timestamp", com.google.firebase.firestore.Query.Direction.DESCENDING)
-        .limit(1)
-        .get()
-        .addOnSuccessListener { documents ->
-            if (!documents.isEmpty) {
-                val document = documents.first()
-                val text = document.getString("text")
-                Log.d("Firestore", "Datos leídos: $text")
-                onComplete(text)
-            } else {
-                Log.d("Firestore", "No hay documentos")
-                onComplete(null)
+    
+    private fun updateDolarWidget(state: com.loam.trabajopractico1loam.viewmodel.DolarUiState) {
+        when {
+            state.isLoading -> {
+                layoutLoading.visibility = View.VISIBLE
+                layoutError.visibility = View.GONE
+                layoutSuccess.visibility = View.GONE
             }
-        }
-        .addOnFailureListener { exception ->
-            Log.w("Firestore", "Error al obtener documentos", exception)
-            onComplete(null)
-        }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun FirestoreDemoPreview() {
-    TrabajoPractico1LOAMTheme {
-        // Preview con mock de Firebase
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Text(
-                text = "Firebase Firestore Demo",
-                style = MaterialTheme.typography.headlineMedium
-            )
-            Text("Firebase configurado correctamente")
-            OutlinedTextField(
-                value = "",
-                onValueChange = { },
-                label = { Text("Texto a guardar") },
-                modifier = Modifier.fillMaxWidth()
-            )
-            Button(onClick = { }) {
-                Text("Guardar en Firestore")
+            
+            state.errorMessage != null -> {
+                layoutLoading.visibility = View.GONE
+                layoutError.visibility = View.VISIBLE
+                layoutSuccess.visibility = View.GONE
             }
-            Button(onClick = { }) {
-                Text("Leer de Firestore")
+            
+            state.dolar != null -> {
+                layoutLoading.visibility = View.GONE
+                layoutError.visibility = View.GONE
+                layoutSuccess.visibility = View.VISIBLE
+                
+                tvCompra.text = "$${decimalFormat.format(state.dolar.compra)}"
+                tvVenta.text = "$${decimalFormat.format(state.dolar.venta)}"
             }
         }
     }
