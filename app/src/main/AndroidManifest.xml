@@ -19,6 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrabajoPractico1LOAM">
         <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.TrabajoPractico1LOAM" />
+        <activity
             android:name=".GrabadorAudioActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"

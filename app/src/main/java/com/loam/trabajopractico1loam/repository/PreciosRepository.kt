@@ -127,27 +127,4 @@ class PreciosRepository(
             Result.failure(e)
         }
     }
-
-    /**
-     * Obtiene un precio específico por tipo
-     */
-    suspend fun getPrecioPorTipo(tipo: TipoPrecio): Result<PrecioReferencia?> {
-        return try {
-            val snapshot = firestore.collection(COLLECTION_NAME)
-                .whereEqualTo("tipo", tipo.name)
-                .whereEqualTo("activo", true)
-                .limit(1)
-                .get()
-                .await()
-
-            val precio = snapshot.documents.firstOrNull()?.let { doc ->
-                doc.toObject(PrecioReferencia::class.java)?.copy(id = doc.id)
-            }
-
-            Result.success(precio)
-        } catch (e: Exception) {
-            Log.e(TAG, "Error al obtener precio por tipo: $tipo", e)
-            Result.failure(e)
-        }
-    }
 }

@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnSeccion3: CardView
     private lateinit var btnSeccion4: CardView
     private lateinit var btnMedidor: CardView
+    private lateinit var chatBtn: CardView
     private lateinit var grabadorAudioBtn: CardView
 
     private lateinit var camaraFrontalBtn: CardView
@@ -92,6 +93,7 @@ class MainActivity : AppCompatActivity() {
             btnSeccion4 = findViewById(R.id.btnSeccion4)
             camaraFrontalBtn = findViewById(R.id.camaraFrontalBtn)
             grabadorAudioBtn = findViewById(R.id.grabadorAudioBtn)
+            chatBtn = findViewById(R.id.chatBtn)
             
             // Mostrar texto inicial
             cotizacionDolar.text = "Iniciando..."
@@ -132,6 +134,10 @@ class MainActivity : AppCompatActivity() {
 
         grabadorAudioBtn.setOnClickListener {
             startActivity(Intent(this, GrabadorAudioActivity::class.java))
+        }
+
+        chatBtn.setOnClickListener {
+            startActivity(Intent(this, ChatActivity::class.java))
         }
 
     }
