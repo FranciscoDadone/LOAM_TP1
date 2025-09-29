@@ -1,6 +1,7 @@
 package com.loam.trabajopractico1loam
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.widget.TextView
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnPrecios: CardView
     private lateinit var btnSeccion3: CardView
     private lateinit var btnSeccion4: CardView
+    private lateinit var btnMedidor: CardView
+
+    private lateinit var camaraFrontalBtn: CardView
 
     private val dolarService = DolarService()
     private val decimalFormat = DecimalFormat("#.##")
@@ -85,6 +89,7 @@ class MainActivity : AppCompatActivity() {
             btnPrecios = findViewById(R.id.btnPrecios)
             btnSeccion3 = findViewById(R.id.btnSeccion3)
             btnSeccion4 = findViewById(R.id.btnSeccion4)
+            camaraFrontalBtn = findViewById(R.id.camaraFrontalBtn)
             
             // Mostrar texto inicial
             cotizacionDolar.text = "Iniciando..."
@@ -117,7 +122,11 @@ class MainActivity : AppCompatActivity() {
     private fun setupClickListeners() {
         btnPrecios.setOnClickListener {
             // Temporalmente desactivado para evitar crash
-            // startActivity(Intent(this, PreciosActivity::class.java))
+             startActivity(Intent(this, PreciosActivity::class.java))
+        }
+
+        camaraFrontalBtn.setOnClickListener {
+            startActivity(Intent(this, CameraActivity::class.java))
         }
         
         btnSeccion3.setOnClickListener {
