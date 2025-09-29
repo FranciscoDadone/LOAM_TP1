@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnSeccion3: CardView
     private lateinit var btnSeccion4: CardView
     private lateinit var btnMedidor: CardView
+    private lateinit var grabadorAudioBtn: CardView
 
     private lateinit var camaraFrontalBtn: CardView
 
@@ -90,6 +91,7 @@ class MainActivity : AppCompatActivity() {
             btnSeccion3 = findViewById(R.id.btnSeccion3)
             btnSeccion4 = findViewById(R.id.btnSeccion4)
             camaraFrontalBtn = findViewById(R.id.camaraFrontalBtn)
+            grabadorAudioBtn = findViewById(R.id.grabadorAudioBtn)
             
             // Mostrar texto inicial
             cotizacionDolar.text = "Iniciando..."
@@ -121,20 +123,16 @@ class MainActivity : AppCompatActivity() {
     
     private fun setupClickListeners() {
         btnPrecios.setOnClickListener {
-            // Temporalmente desactivado para evitar crash
              startActivity(Intent(this, PreciosActivity::class.java))
         }
 
         camaraFrontalBtn.setOnClickListener {
             startActivity(Intent(this, CameraActivity::class.java))
         }
-        
-        btnSeccion3.setOnClickListener {
-            // TODO: Implementar navegación a Sección 3
+
+        grabadorAudioBtn.setOnClickListener {
+            startActivity(Intent(this, GrabadorAudioActivity::class.java))
         }
-        
-        btnSeccion4.setOnClickListener {
-            // TODO: Implementar navegación a Sección 4
-        }
+
     }
 }
