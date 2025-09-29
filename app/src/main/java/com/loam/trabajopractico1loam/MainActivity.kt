@@ -1,12 +1,17 @@
 package com.loam.trabajopractico1loam
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.hardware.camera2.CameraManager
+import android.net.Uri
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.loam.trabajopractico1loam.services.DolarService
 import kotlinx.coroutines.launch
@@ -25,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnMedidor: CardView
     private lateinit var chatBtn: CardView
     private lateinit var grabadorAudioBtn: CardView
+    private lateinit var btnLlamar: CardView
 
     private lateinit var camaraFrontalBtn: CardView
 
@@ -94,7 +100,8 @@ class MainActivity : AppCompatActivity() {
             camaraFrontalBtn = findViewById(R.id.camaraFrontalBtn)
             grabadorAudioBtn = findViewById(R.id.grabadorAudioBtn)
             chatBtn = findViewById(R.id.chatBtn)
-            
+            btnLlamar = findViewById(R.id.btnLlamar)
+
             // Mostrar texto inicial
             cotizacionDolar.text = "Iniciando..."
         } catch (e: Exception) {
@@ -121,7 +128,10 @@ class MainActivity : AppCompatActivity() {
         btnPrecios = findViewById(R.id.btnPrecios)
         btnSeccion3 = findViewById(R.id.btnSeccion3)
         btnSeccion4 = findViewById(R.id.btnSeccion4)
+        btnLlamar = findViewById(R.id.btnLlamar)
     }
+
+
     
     private fun setupClickListeners() {
         btnPrecios.setOnClickListener {
@@ -138,6 +148,12 @@ class MainActivity : AppCompatActivity() {
 
         chatBtn.setOnClickListener {
             startActivity(Intent(this, ChatActivity::class.java))
+        }
+
+        btnLlamar.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL);
+            intent.data = Uri.parse("tel:2954465433")
+            startActivity(intent)
         }
 
     }
