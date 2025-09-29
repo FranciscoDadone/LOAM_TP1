@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import com.loam.trabajopractico1loam.utils.ManejadorCamara
 import kotlin.apply
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -80,13 +81,11 @@ fun Camara() {
 
     Box(modifier = Modifier.fillMaxSize()) {
         if (hasCameraPermission) {
-            // Vista previa de la cámara
             AndroidView(
                 factory = { previewView },
                 modifier = Modifier.fillMaxSize()
             )
 
-            // Overlay superior con controles
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -95,7 +94,6 @@ fun Camara() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Flash
                 IconButton(
                     onClick = {
                         manejadorCamara.toggleFlash()
@@ -118,7 +116,6 @@ fun Camara() {
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                // Indicador de grabación
                 if (isRecording) {
                     Card(
                         modifier = Modifier
@@ -153,14 +150,12 @@ fun Camara() {
                 }
             }
 
-            // Controles inferiores
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)
-                    // Respetar navigation bar y un poco más de separación
                     .navigationBarsPadding()
-                    .padding(bottom = 8.dp) // mueve un poco más arriba si hace falta
+                    .padding(bottom = 8.dp)
                     .background(
                         brush = androidx.compose.ui.graphics.Brush.verticalGradient(
                             colors = listOf(
@@ -173,13 +168,11 @@ fun Camara() {
                     )
                     .padding(24.dp)
             ) {
-                // Fila principal de controles
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Galería (placeholder)
                     IconButton(
                         onClick = {
                             val lastUri = manejadorCamara.getLastSavedImageUri()
@@ -189,16 +182,8 @@ fun Camara() {
                                     setDataAndType(lastUri, "image/*")
                                     addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
                                 }
-                                try {
-                                    context.startActivity(viewIntent)
-                                } catch (e: Exception) {
-                                    // Si algo falla, abrimos la galería general
-                                    val galleryIntent = Intent(Intent.ACTION_VIEW, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                                    galleryIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                    context.startActivity(galleryIntent)
-                                }
+                                context.startActivity(viewIntent)
                             } else {
-                                // No hay foto reciente: abrir app de galería
                                 val galleryIntent = Intent(Intent.ACTION_VIEW, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                                 galleryIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 context.startActivity(galleryIntent)
@@ -224,9 +209,7 @@ fun Camara() {
                         )
                     }
 
-                    // Botón central (Foto/Video)
                     Box(contentAlignment = Alignment.Center) {
-                        // Anillo exterior con gradiente
                         Box(
                             modifier = Modifier
                                 .size(88.dp)
@@ -244,7 +227,6 @@ fun Camara() {
                                 )
                         )
 
-                        // Anillo intermedio
                         Box(
                             modifier = Modifier
                                 .size(76.dp)
@@ -254,7 +236,6 @@ fun Camara() {
                                 )
                         )
 
-                        // Botón de captura
                         IconButton(
                             onClick = {
                                 if (isRecording) {
@@ -298,7 +279,6 @@ fun Camara() {
                         }
                     }
 
-                    // Cambiar cámara
                     IconButton(
                         onClick = {
                             manejadorCamara.cambiarCamara()
@@ -327,13 +307,11 @@ fun Camara() {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Fila de modos y video
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Modo Video
                     TextButton(
                         onClick = {
                             if (!isRecording) {
@@ -407,7 +385,6 @@ fun Camara() {
             }
 
         } else {
-            // Pantalla de permisos
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
