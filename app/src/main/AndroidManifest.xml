@@ -19,8 +19,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrabajoPractico1LOAM">
+        
+        <!-- ARCore metadata -->
+        <meta-data android:name="com.google.ar.core" android:value="required" />
+        
+        <activity
+            android:name=".ar.ARMeasureActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.TrabajoPractico1LOAM"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ChatActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.TrabajoPractico1LOAM" />
+        <activity
+            android:name=".ar.HelloArActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.TrabajoPractico1LOAM" />

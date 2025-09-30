@@ -13,6 +13,8 @@ import androidx.cardview.widget.CardView
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.loam.trabajopractico1loam.ar.HelloArActivity
+import com.loam.trabajopractico1loam.ar.ARMeasureActivity
 import com.loam.trabajopractico1loam.services.DolarService
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
@@ -92,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         try {
             // Widget del dólar
             cotizacionDolar = findViewById(R.id.cotizacionDolar)
+            tvLinterna = findViewById(R.id.modoLinternaTexto)
             
             // Botones del menú
             btnPrecios = findViewById(R.id.btnPrecios)
@@ -101,6 +104,7 @@ class MainActivity : AppCompatActivity() {
             grabadorAudioBtn = findViewById(R.id.grabadorAudioBtn)
             chatBtn = findViewById(R.id.chatBtn)
             btnLlamar = findViewById(R.id.btnLlamar)
+            btnMedidor = findViewById(R.id.btnMedidor)
 
             // Mostrar texto inicial
             cotizacionDolar.text = "Iniciando..."
@@ -121,14 +125,6 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace() // Para debug
             }
         }
-        // Widget del dólar
-        tvLinterna = findViewById(R.id.modoLinternaTexto)
-        
-        // Botones del menú
-        btnPrecios = findViewById(R.id.btnPrecios)
-        btnSeccion3 = findViewById(R.id.btnSeccion3)
-        btnSeccion4 = findViewById(R.id.btnSeccion4)
-        btnLlamar = findViewById(R.id.btnLlamar)
     }
 
 
@@ -156,5 +152,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        btnMedidor.setOnClickListener {
+            startActivity(Intent(this, ARMeasureActivity::class.java))
+        }
     }
 }

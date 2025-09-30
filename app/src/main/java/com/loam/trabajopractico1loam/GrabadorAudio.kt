@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import com.loam.trabajopractico1loam.utils.Permisos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -43,30 +44,6 @@ import kotlin.let
 import kotlin.text.format
 import kotlin.text.isNotEmpty
 
-fun permisos(context: Context): Boolean {
-    val audioPermission = ContextCompat.checkSelfPermission(
-        context,
-        Manifest.permission.RECORD_AUDIO
-    ) == PackageManager.PERMISSION_GRANTED
-
-    // Para Android 10 y anteriores, también necesitamos permisos de almacenamiento
-    val storagePermission = if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
-        ContextCompat.checkSelfPermission(
-            context,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_GRANTED
-    } else {
-        // En Android 11+ no necesitamos estos permisos si guardamos en almacenamiento interno
-        true
-    }
-
-    return audioPermission && storagePermission
-}
-
 @SuppressLint("ContextCastToActivity")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -80,7 +57,7 @@ fun GrabadorAudio() {
     var mediaRecorder by remember { mutableStateOf<MediaRecorder?>(null) }
     var audioFilePath by remember { mutableStateOf("") }
     var recordingTime by remember { mutableStateOf(0L) }
-    var hasPermission by remember { mutableStateOf(permisos(context)) }
+    var hasPermission by remember { mutableStateOf(Permisos.audio(context)) }
     var pendingStartAfterPermission by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf("") }
 
@@ -122,7 +99,7 @@ fun GrabadorAudio() {
         val owner = lifecycleOwner
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
-                hasPermission = permisos(context)
+                hasPermission = Permisos.audio(context)
             }
         }
         owner?.lifecycle?.addObserver(observer)
