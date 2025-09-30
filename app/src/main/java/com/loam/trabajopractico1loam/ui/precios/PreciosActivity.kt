@@ -1,4 +1,4 @@
-package com.loam.trabajopractico1loam
+package com.loam.trabajopractico1loam.ui.precios
 
 import android.os.Bundle
 import android.view.View
@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.loam.trabajopractico1loam.R
+import com.loam.trabajopractico1loam.viewmodel.PreciosUiState
 import com.loam.trabajopractico1loam.viewmodel.PreciosViewModel
 
 class PreciosActivity : AppCompatActivity() {
@@ -63,7 +65,7 @@ class PreciosActivity : AppCompatActivity() {
         }
     }
     
-    private fun updateUI(state: com.loam.trabajopractico1loam.viewmodel.PreciosUiState) {
+    private fun updateUI(state: PreciosUiState) {
         when {
             state.isLoading -> {
                 progressBar.visibility = View.VISIBLE

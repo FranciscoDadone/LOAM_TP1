@@ -1,10 +1,11 @@
-package com.loam.trabajopractico1loam
+package com.loam.trabajopractico1loam.ui.precios
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.loam.trabajopractico1loam.R
 import com.loam.trabajopractico1loam.model.PrecioReferencia
 
 class PreciosAdapter(private var precios: List<PrecioReferencia>) : 
