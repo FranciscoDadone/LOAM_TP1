@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     // Botones del menú
     private lateinit var btnPrecios: CardView
     private lateinit var btnSeccion3: CardView
-    private lateinit var btnSeccion4: CardView
     private lateinit var btnMedidor: CardView
     private lateinit var chatBtn: CardView
     private lateinit var grabadorAudioBtn: CardView
@@ -109,12 +108,12 @@ class MainActivity : AppCompatActivity() {
             // Botones del menú
             btnPrecios = findViewById(R.id.btnPrecios)
             btnSeccion3 = findViewById(R.id.btnSeccion3)
-            btnSeccion4 = findViewById(R.id.btnSeccion4)
             camaraFrontalBtn = findViewById(R.id.camaraFrontalBtn)
             grabadorAudioBtn = findViewById(R.id.grabadorAudioBtn)
             chatBtn = findViewById(R.id.chatBtn)
             btnLlamar = findViewById(R.id.btnLlamar)
             btnUbicacion = findViewById(R.id.btnUbicacion)
+            tvLinterna = findViewById(R.id.modoLinternaTexto)
 
             // Mostrar texto inicial
             cotizacionDolar.text = "Iniciando..."
@@ -136,8 +135,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         // Widget del dólar
-        tvLinterna = findViewById(R.id.modoLinternaTexto)
-
 
     }
 
