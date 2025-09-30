@@ -1,5 +1,6 @@
 package com.loam.trabajopractico1loam
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -13,8 +14,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
+import com.loam.trabajopractico1loam.ar.ARMeasureActivity
 import com.loam.trabajopractico1loam.services.DolarService
-import com.loam.trabajopractico1loam.ui.mapa.MapFragment
 import com.loam.trabajopractico1loam.ui.precios.PreciosActivity
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
@@ -103,10 +104,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         try {
-            // Widget del dólar
             cotizacionDolar = findViewById(R.id.cotizacionDolar)
-
-            // Botones del menú
             btnPrecios = findViewById(R.id.btnPrecios)
             btnSeccion3 = findViewById(R.id.btnSeccion3)
             camaraFrontalBtn = findViewById(R.id.camaraFrontalBtn)
@@ -115,12 +113,12 @@ class MainActivity : AppCompatActivity() {
             btnLlamar = findViewById(R.id.btnLlamar)
             btnUbicacion = findViewById(R.id.btnUbicacion)
             tvLinterna = findViewById(R.id.modoLinternaTexto)
+            btnMedidor = findViewById(R.id.btnMedidor)
 
-            // Mostrar texto inicial
             cotizacionDolar.text = "Iniciando..."
         } catch (e: Exception) {
             e.printStackTrace()
-            finish() // Cerrar la activity si no puede inicializar las vistas
+            finish()
         }
     }
 
@@ -132,14 +130,10 @@ class MainActivity : AppCompatActivity() {
                 cotizacionDolar.text = "Dólar: $${decimalFormat.format(dolar.compra)} - $${decimalFormat.format(dolar.venta)}"
             } catch (e: Exception) {
                 cotizacionDolar.text = "Error al cargar dólar: ${e.message}"
-                e.printStackTrace() // Para debug
+                e.printStackTrace()
             }
         }
-        // Widget del dólar
-
     }
-
-
 
     private fun setupClickListeners() {
         btnPrecios.setOnClickListener {
@@ -168,8 +162,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, MapActivity::class.java))
         }
 
+        btnMedidor.setOnClickListener {
+            startActivity(Intent(this, ARMeasureActivity::class.java))
+        }
+
     }
     private val batteryReceiver = object : BroadcastReceiver() {
+        @SuppressLint("SetTextI18n")
         override fun onReceive(context: Context?, intent: Intent?) {
             val level = intent?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
             val scale = intent?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
