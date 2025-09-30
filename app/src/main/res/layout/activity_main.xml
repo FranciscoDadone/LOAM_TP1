@@ -133,20 +133,19 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_launcher_background"
-                android:layout_marginEnd="16dp" />
-
-            <TextView
-                android:id="@+id/cotizacionDolar"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dólar: "
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/cotizacionDolar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dólar: "
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -155,7 +154,7 @@
         android:layout_height="24dp" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/medidorBtn"
+        android:id="@+id/btnMedidor"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         app:cardBackgroundColor="#F44336"
@@ -165,7 +164,6 @@
         android:foreground="?android:attr/selectableItemBackground">
 
         <LinearLayout
-            android:id="@+id/btnMedidor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
