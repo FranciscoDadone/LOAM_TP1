@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -24,5 +27,29 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+    
+    <!-- Map Fragment -->
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.loam.trabajopractico1loam.ui.mapa.MapFragment"
+        android:label="Mapa"
+        tools:layout="@layout/fragment_map">
+
+        <action
+            android:id="@+id/action_mapFragment_to_listaFragment"
+            app:destination="@id/listaFragment" />
+    </fragment>
+    
+    <!-- Lista Fragment -->
+    <fragment
+        android:id="@+id/listaFragment"
+        android:name="com.loam.trabajopractico1loam.ui.mapa.ListaFragment"
+        android:label="Lugares Guardados"
+        tools:layout="@layout/fragment_lista">
+
+        <action
+            android:id="@+id/action_listaFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
 </navigation>

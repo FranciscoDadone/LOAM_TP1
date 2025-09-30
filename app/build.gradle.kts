@@ -64,6 +64,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.analytics)
+    implementation("com.google.firebase:firebase-database-ktx")
     
     // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
@@ -77,6 +78,9 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.cardview)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.play.services.places)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
