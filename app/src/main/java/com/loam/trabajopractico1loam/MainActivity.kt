@@ -16,8 +16,8 @@ import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import com.loam.trabajopractico1loam.ar.ARMeasureActivity
 import com.loam.trabajopractico1loam.services.DolarService
-import com.loam.trabajopractico1loam.ui.mapa.MapActivity
-import com.loam.trabajopractico1loam.ui.precios.PreciosActivity
+import com.loam.trabajopractico1loam.presentation.ui.mapa.MapActivity
+import com.loam.trabajopractico1loam.presentation.ui.precios.PreciosActivity
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat

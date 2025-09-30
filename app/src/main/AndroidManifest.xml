@@ -57,12 +57,12 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.TrabajoPractico1LOAM" />
         <activity
-            android:name=".ui.mapa.MapActivity"
+            android:name=".presentation.ui.mapa.MapActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.TrabajoPractico1LOAM" />
         <activity
-            android:name=".ui.precios.PreciosActivity"
+            android:name=".presentation.ui.precios.PreciosActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.TrabajoPractico1LOAM" />

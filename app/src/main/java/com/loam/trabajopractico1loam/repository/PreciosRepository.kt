@@ -2,10 +2,8 @@ package com.loam.trabajopractico1loam.repository
 
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.Query
-import com.loam.trabajopractico1loam.model.PrecioReferencia
-import com.loam.trabajopractico1loam.model.TipoPrecio
+import com.loam.trabajopractico1loam.models.PrecioReferencia
+import com.loam.trabajopractico1loam.models.TipoPrecio
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow

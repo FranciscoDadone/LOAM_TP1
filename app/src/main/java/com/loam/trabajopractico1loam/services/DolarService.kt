@@ -1,7 +1,7 @@
 package com.loam.trabajopractico1loam.services
 
 import com.google.gson.Gson
-import com.loam.trabajopractico1loam.model.Dolar
+import com.loam.trabajopractico1loam.models.Dolar
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.get

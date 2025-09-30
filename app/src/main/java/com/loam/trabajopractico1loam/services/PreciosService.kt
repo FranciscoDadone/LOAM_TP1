@@ -2,7 +2,7 @@ package com.loam.trabajopractico1loam.services
 
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import com.loam.trabajopractico1loam.model.PrecioReferencia
+import com.loam.trabajopractico1loam.models.PrecioReferencia
 import com.loam.trabajopractico1loam.repository.PreciosRepository
 import kotlinx.coroutines.flow.Flow
 

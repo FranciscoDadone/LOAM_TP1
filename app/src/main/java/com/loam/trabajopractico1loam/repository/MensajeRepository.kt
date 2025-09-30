@@ -2,7 +2,7 @@ package com.loam.trabajopractico1loam.repository
 
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.loam.trabajopractico1loam.model.Mensaje
+import com.loam.trabajopractico1loam.models.Mensaje
 
 class MensajeRepository {
     private val db = FirebaseFirestore.getInstance()
