@@ -1,11 +1,9 @@
 package com.loam.trabajopractico1loam
 
-import android.Manifest
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageManager
 import android.hardware.camera2.CameraManager
 import android.net.Uri
 import android.os.BatteryManager
@@ -14,11 +12,10 @@ import android.os.SystemClock
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.loam.trabajopractico1loam.ar.HelloArActivity
 import com.loam.trabajopractico1loam.ar.ARMeasureActivity
 import com.loam.trabajopractico1loam.services.DolarService
+import com.loam.trabajopractico1loam.ui.precios.PreciosActivity
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
