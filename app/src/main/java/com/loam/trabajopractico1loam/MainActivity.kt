@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
 import com.loam.trabajopractico1loam.services.DolarService
+import com.loam.trabajopractico1loam.ui.mapa.MapFragment
 import com.loam.trabajopractico1loam.ui.precios.PreciosActivity
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
@@ -164,6 +165,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_DIAL);
             intent.data = Uri.parse("tel:2954465433")
             startActivity(intent)
+        }
+
+        btnUbicacion.setOnClickListener {
+            startActivity(Intent(this, MapActivity::class.java))
         }
 
     }

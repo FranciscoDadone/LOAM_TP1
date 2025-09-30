@@ -70,4 +70,31 @@
     <string name="distance_meter">Distance Meter</string>
     <string name="send_message">Send Message</string>
     <string name="type_a_message">Type a message...</string>
+    <string name="google_maps_key">AIzaSyBBsZKMWcUm2QQ4XOhPCvTv9uwIYTXVOzQ</string>
+    
+    <!-- MapFragment strings -->
+    <string name="buscar_direccion">Buscar dirección...</string>
+    <string name="guardar_ubicacion">Guardar Ubicación</string>
+    <string name="mostrar_en_mapa">Mostrar en Mapa</string>
+    <string name="ocultar_guardados">Ocultar Guardados</string>
+    <string name="lugar_guardado_exitosamente">Lugar guardado exitosamente</string>
+    <string name="error_guardar_lugar">Error al guardar el lugar</string>
+    <string name="seleccione_ubicacion_primero">Seleccione una ubicación primero</string>
+    <string name="ingrese_direccion">Ingrese una dirección</string>
+    <string name="no_encontrado_lugar">No se encontró el lugar</string>
+    <string name="puntos_guardados_cargados">Se cargaron %d puntos guardados</string>
+    <string name="no_puntos_guardados">No hay puntos guardados</string>
+    <string name="error_cargar_puntos">Error al cargar puntos guardados</string>
+    <string name="eliminar_punto_guardado">Eliminar punto guardado</string>
+    <string name="confirmar_eliminar_punto">¿Estás seguro de que quieres eliminar este punto?</string>
+    <string name="punto_eliminado_exitosamente">Punto eliminado exitosamente</string>
+    <string name="error_eliminar_punto">Error al eliminar el punto</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="cancelar">Cancelar</string>
+    
+    <!-- Strings adicionales para MapFragment -->
+    <string name="ingrese_referencia">Ingrese una referencia</string>
+    <string name="ver_guardados_no_disponible">Ver guardados no disponible en esta vista</string>
+    <string name="punto_elegido">Punto elegido</string>
+    <string name="estoy_aqui">Estoy aquí</string>
 </resources>
