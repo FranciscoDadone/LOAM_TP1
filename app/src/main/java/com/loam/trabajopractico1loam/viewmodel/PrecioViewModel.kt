@@ -59,21 +59,6 @@ class PreciosViewModel : ViewModel() {
         }
     }
 
-    fun actualizarPrecio(precio: PrecioReferencia) {
-        viewModelScope.launch {
-            preciosService.actualizarPrecio(precio)
-                .onFailure { error ->
-                    _uiState.value = _uiState.value?.copy(
-                        errorMessage = "Error al actualizar precio: ${error.message}"
-                    )
-                }
-        }
-    }
-
-    fun clearError() {
-        _uiState.value = _uiState.value?.copy(errorMessage = null)
-    }
-
     fun retry() {
         inicializarPrecios()
         observarPrecios()

@@ -1,9 +1,9 @@
-package com.loam.trabajopractico1loam
+package com.loam.trabajopractico1loam.ui.mapa
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.loam.trabajopractico1loam.ui.mapa.MapFragment
+import com.loam.trabajopractico1loam.R
 
 class MapActivity : AppCompatActivity() {
 
