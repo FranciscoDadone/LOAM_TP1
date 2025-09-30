@@ -13,7 +13,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.lifecycleScope
-import com.loam.trabajopractico1loam.ar.ARMeasureActivity
 import com.loam.trabajopractico1loam.services.DolarService
 import com.loam.trabajopractico1loam.ui.precios.PreciosActivity
 import kotlinx.coroutines.launch
@@ -23,7 +22,7 @@ import java.util.Calendar
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
-    
+
     // Views del widget del dólar
     private lateinit var cotizacionDolar: TextView
     private lateinit var tvLinterna: TextView
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
+
         initViews()
         setupClickListeners()
         loadDolarInfo()
@@ -105,8 +104,7 @@ class MainActivity : AppCompatActivity() {
         try {
             // Widget del dólar
             cotizacionDolar = findViewById(R.id.cotizacionDolar)
-            tvLinterna = findViewById(R.id.modoLinternaTexto)
-            
+
             // Botones del menú
             btnPrecios = findViewById(R.id.btnPrecios)
             btnSeccion3 = findViewById(R.id.btnSeccion3)
@@ -115,7 +113,6 @@ class MainActivity : AppCompatActivity() {
             grabadorAudioBtn = findViewById(R.id.grabadorAudioBtn)
             chatBtn = findViewById(R.id.chatBtn)
             btnLlamar = findViewById(R.id.btnLlamar)
-            btnMedidor = findViewById(R.id.btnMedidor)
 
             // Mostrar texto inicial
             cotizacionDolar.text = "Iniciando..."
@@ -124,7 +121,7 @@ class MainActivity : AppCompatActivity() {
             finish() // Cerrar la activity si no puede inicializar las vistas
         }
     }
-    
+
     private fun loadDolarInfo() {
         lifecycleScope.launch {
             try {
@@ -136,10 +133,18 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace() // Para debug
             }
         }
+        // Widget del dólar
+        tvLinterna = findViewById(R.id.modoLinternaTexto)
+
+        // Botones del menú
+        btnPrecios = findViewById(R.id.btnPrecios)
+        btnSeccion3 = findViewById(R.id.btnSeccion3)
+        btnSeccion4 = findViewById(R.id.btnSeccion4)
+        btnLlamar = findViewById(R.id.btnLlamar)
     }
 
 
-    
+
     private fun setupClickListeners() {
         btnPrecios.setOnClickListener {
              startActivity(Intent(this, PreciosActivity::class.java))
@@ -163,16 +168,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnMedidor.setOnClickListener {
-            startActivity(Intent(this, ARMeasureActivity::class.java))
-        }
     }
     private val batteryReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val level = intent?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
             val scale = intent?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
             val batteryPct = (level * 100) / scale
-
 
             val currentTime = SystemClock.elapsedRealtime()
 
@@ -182,20 +183,17 @@ class MainActivity : AppCompatActivity() {
 
                 if (diffLevel > 0 && diffTime > 0) {
                     val consumoPorMin = diffLevel / diffTime
-                    val tiempoRestanteMin = (batteryPct / consumoPorMin).toInt()
+                    val tiempoRestanteMin = batteryPct / consumoPorMin
 
                     val horaAgotado = Calendar.getInstance().apply {
-                        add(Calendar.MINUTE, tiempoRestanteMin)
+                        add(Calendar.MINUTE, tiempoRestanteMin.toInt())
                     }
                     val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
                     val horaFormateada = sdf.format(horaAgotado.time)
 
-                    val horas = tiempoRestanteMin / 60
-                    val minutos = tiempoRestanteMin % 60
-
                     batteryInfo.text = """
                         Batería actual: $batteryPct %
-                        Tiempo restante: ${horas}h ${minutos}m
+                        Tiempo restante: ${"%.1f".format(tiempoRestanteMin)} min
                         Se agotará aprox a las: $horaFormateada
                     """.trimIndent()
                 }
