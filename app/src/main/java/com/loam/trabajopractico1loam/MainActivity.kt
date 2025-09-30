@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chatBtn: CardView
     private lateinit var grabadorAudioBtn: CardView
     private lateinit var btnLlamar: CardView
+    private lateinit var btnUbicacion: CardView
 
     private lateinit var camaraFrontalBtn: CardView
 
@@ -115,6 +116,7 @@ class MainActivity : AppCompatActivity() {
             grabadorAudioBtn = findViewById(R.id.grabadorAudioBtn)
             chatBtn = findViewById(R.id.chatBtn)
             btnLlamar = findViewById(R.id.btnLlamar)
+            btnUbicacion = findViewById(R.id.btnUbicacion)
 
             // Mostrar texto inicial
             cotizacionDolar.text = "Iniciando..."
@@ -138,11 +140,7 @@ class MainActivity : AppCompatActivity() {
         // Widget del dólar
         tvLinterna = findViewById(R.id.modoLinternaTexto)
 
-        // Botones del menú
-        btnPrecios = findViewById(R.id.btnPrecios)
-        btnSeccion3 = findViewById(R.id.btnSeccion3)
-        btnSeccion4 = findViewById(R.id.btnSeccion4)
-        btnLlamar = findViewById(R.id.btnLlamar)
+
     }
 
 
