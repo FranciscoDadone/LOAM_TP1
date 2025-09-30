@@ -20,7 +20,7 @@
         android:text="Menú Principal"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="@color/primary"
+        android:textColor="@color/white"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp" />
 
@@ -31,7 +31,7 @@
         android:text="Tiempo de batería:"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@color/primary"
+        android:textColor="@color/white"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp" />
 
@@ -46,7 +46,7 @@
         android:text="Dólar: "
         android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@color/primary"
+        android:textColor="@color/white"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp" />
 
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="#4CAF50"
+        app:cardBackgroundColor="#346dee"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         android:clickable="true"
@@ -78,7 +78,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/baseline_attach_money_24"
                 android:layout_marginEnd="16dp" />
 
             <TextView
@@ -99,7 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="#FFC107"
+        app:cardBackgroundColor="#346dee"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         android:clickable="true"
@@ -117,7 +117,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/linterna" />
 
             <TextView
                 android:id="@+id/modoLinternaTexto"
@@ -136,7 +136,7 @@
         android:id="@+id/btnMedidor"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:cardBackgroundColor="#F44336"
+        app:cardBackgroundColor="#346dee"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         android:clickable="true"
@@ -154,7 +154,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/metro" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
         android:id="@+id/camaraFrontalBtn"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:cardBackgroundColor="#F44336"
+        app:cardBackgroundColor="#346dee"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         android:clickable="true"
@@ -192,7 +192,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/camara" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -212,7 +212,7 @@
         android:id="@+id/grabadorAudioBtn"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:cardBackgroundColor="#F44336"
+        app:cardBackgroundColor="#346dee"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         android:clickable="true"
@@ -230,7 +230,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/mic" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -250,7 +250,7 @@
         android:id="@+id/chatBtn"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:cardBackgroundColor="#F44336"
+        app:cardBackgroundColor="#346dee"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         android:clickable="true"
@@ -268,7 +268,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/chat" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -288,7 +288,7 @@
         android:id="@+id/btnLlamar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:cardBackgroundColor="#F44336"
+        app:cardBackgroundColor="#346dee"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         android:clickable="true"
@@ -306,7 +306,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/call" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -326,7 +326,7 @@
         android:id="@+id/btnUbicacion"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:cardBackgroundColor="#F44336"
+        app:cardBackgroundColor="#346dee"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         android:clickable="true"
@@ -344,7 +344,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/map" />
 
             <TextView
                 android:layout_width="wrap_content"
