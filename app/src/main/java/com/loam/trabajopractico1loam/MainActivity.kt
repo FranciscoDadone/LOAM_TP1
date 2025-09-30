@@ -1,21 +1,27 @@
 package com.loam.trabajopractico1loam
 
 import android.Manifest
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.hardware.camera2.CameraManager
 import android.net.Uri
+import android.os.BatteryManager
 import android.os.Bundle
+import android.os.SystemClock
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.loam.trabajopractico1loam.services.DolarService
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     
@@ -41,6 +47,10 @@ class MainActivity : AppCompatActivity() {
     private var cameraId: String? = null
     private var isFlashOn = false
 
+    private lateinit var batteryInfo: TextView
+    private var lastLevel: Int? = null
+    private var lastTime: Long? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -64,6 +74,10 @@ class MainActivity : AppCompatActivity() {
                 tvLinterna.text = "Linterna encendida"
             }
         }
+
+        batteryInfo = findViewById(R.id.tvTiempoBateria)
+        val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+        registerReceiver(batteryReceiver, filter)
 
     }
 
@@ -156,5 +170,43 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+    private val batteryReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val level = intent?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
+            val scale = intent?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
+            val batteryPct = (level * 100) / scale
+
+
+            val currentTime = SystemClock.elapsedRealtime()
+
+            if (lastLevel != null && lastTime != null) {
+                val diffLevel = lastLevel!! - batteryPct
+                val diffTime = (currentTime - lastTime!!) / 1000.0 / 60.0 // en minutos
+
+                if (diffLevel > 0 && diffTime > 0) {
+                    val consumoPorMin = diffLevel / diffTime
+                    val tiempoRestanteMin = (batteryPct / consumoPorMin).toInt()
+
+                    val horaAgotado = Calendar.getInstance().apply {
+                        add(Calendar.MINUTE, tiempoRestanteMin)
+                    }
+                    val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+                    val horaFormateada = sdf.format(horaAgotado.time)
+
+                    val horas = tiempoRestanteMin / 60
+                    val minutos = tiempoRestanteMin % 60
+
+                    batteryInfo.text = """
+                        Batería actual: $batteryPct %
+                        Tiempo restante: ${horas}h ${minutos}m
+                        Se agotará aprox a las: $horaFormateada
+                    """.trimIndent()
+                }
+            }
+
+            lastLevel = batteryPct
+            lastTime = currentTime
+        }
     }
 }
